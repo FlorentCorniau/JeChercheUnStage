@@ -1,0 +1,73 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Mon Profil {% endblock %}
+
+{% block body %}
+    <main>
+        <div class="container mt-5 ">
+            <div class="container mt-5 ">
+                
+                {% include "fragments/_flash_message.html.twig" %}
+
+                <div class="row mb-4">
+                    <div class="col-md-12 bg-body-tertiary border p-3 text-center rounded">
+                        <div class="d-flex justify-content-center mb-4 ">
+
+                            {% if app.user.pictureName is defined and app.user.pictureName is not empty %}
+                                    <img src={{ asset('images/stagiaires/' ~ app.user.pictureName) }} class="img-fluid rounded-circle" style="width: 100px; height: 100px; object-fit: cover;" alt="Une photo de profile d'un stagiaire">
+                            {% else %} 
+                                    <img src={{ asset ('images/stagiaires/logo-stagiaire.png')}} class="img-fluid rounded-circle" style="width: 100px; height: 100px; object-fit: cover;" alt="Image par défaut"  >   
+                            {% endif %}     
+
+                        </div>
+
+                        <h1 class="mb-4 text-center text-muted fw-semibold"> {{ app.user.firstname }} {{ app.user.lastname }} </h1> 
+                        <a class="btn btn-warning bi bi-pencil btn-sm mb-2" role="button" href='{{ path('app_front_intern_update') }}' >
+                            Modifier
+                        </a>
+                    </div>
+                </div>
+        
+                <div class="row justify-content-between">
+                    <div class="col-md-6 bg-body-tertiary border p-4 text-center me-4 rounded">
+                        <h3 class="mb-3 text-center text-muted fw-semibold "> Description </h3>
+                        <p class="text-start overflow-auto" style="height: 50vh;"> {{ app.user.description|nl2br|raw}} </p>
+                    </div>
+
+                    <div class="col-md-5 d-flex justify-content-between flex-column bg-body-tertiary border rounded">
+                        <div class="row">
+                            <div class="p-3 rounded" >
+                                <h3 class="mb-3 text-center text-muted fw-semibold"> Informations complémentaires </h3>
+                                <div class="row d-flex align-items-between pb-2 ">
+
+                                    {% if app.user.birthdate is defined and app.user.birthdate is not empty %}
+                                        <h5 class="border-top p-2"><b> Date de naissance :</b> </h5>
+                                        <p>{{ app.user.birthdate|date("d-m-Y")}}
+                                    {% else %}
+                                        <p>Aucune date de naissance définie</p>    
+                                    {% endif %}
+
+                                    <h5 class="border-top p-2"> <b>Région : </b></h5>
+                                    <p>{{ app.user.region}} </p>
+
+                                    <h5 class="border-top p-2"> <b> Secteurs d'activités :</b> </h5>
+                                    {% if intern.industries is defined and intern.industries is not empty %}
+                                        {% for industry in intern.industries %}
+                                            <p>{{ industry }}
+                                        {% endfor %} 
+                                    {% else %}
+                                        <p>Aucun secteur d'activité disponible.</p>
+                                    {% endif %} 
+
+                                    <h5 class="border-top p-2"> <b>Date d’inscription au site : </b> </h5>
+                                    <p>{{ app.user.createdAt|date("d-m-Y")}} 
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>       
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Trouver un stage n’est plus une corvée{% endblock %}
+
+{% block body %}
+<main class="bg-purple">    
+    <div class="stars">
+        <div class="central-body">
+            <!--<img class="image-404" src="http://salehriaz.com/404Page/img/404.svg" width="300px">-->
+            <h1 class="text-white">ERROR 403</h1>
+            <i class="bi bi-lock-fill fs-1 text-white"></i>
+            <h4 class="text-white">Vous n'avez pas accès à cette page.</h4>
+            <a href={{ path('app_front_main_home') }} class="btn btn-primary mt-3" target="_blank">Retour à la page d'accueil</a>
+        </div>
+        <div class="objects">
+            <img class="object_rocket" src="http://salehriaz.com/404Page/img/rocket.svg" width="40px">
+            <div class="earth-moon">
+                <img class="object_earth" src="http://salehriaz.com/404Page/img/earth.svg" width="100px">
+                <img class="object_moon" src="http://salehriaz.com/404Page/img/moon.svg" width="80px">
+            </div>
+            <div class="box_astronaut">
+                <img class="object_astronaut" src="http://salehriaz.com/404Page/img/astronaut.svg" width="140px">
+            </div>
+        </div>
+        <div class="glowing_stars">
+            <div class="star"></div>
+            <div class="star"></div>
+            <div class="star"></div>
+            <div class="star"></div>
+            <div class="star"></div>
+
+        </div>
+    </div>
+</main>
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends 'back/base.html.twig' %}
+
+{% block title %} Modification d'un administrateur {% endblock %}
+
+{% block body %}
+    <main>
+        <div class="container mt-5 ">
+            <div class="col-md-12 bg-body-tertiary border p-3 text-center rounded">
+                <h2 class="text-muted fw-bold p-2"> Modification de " {{admin.firstname}} {{admin.lastname}}"</h2>
+            </div>
+                
+            <div class="container mt-5">
+                <div class="row justify-content-between">
+                    <div class="col-md-12 bg-body-tertiary border p-4 me-4 rounded">
+                        <p class="mb-4 text-danger"><i>* Champs obligatoires </i></p>
+
+                        {{ form_start(formUpdateAdmin, {'attr': {'novalidate': 'novalidate'}}) }}  
+
+                        {{ form_widget(formUpdateAdmin) }}
+
+                        {{ form_end(formUpdateAdmin) }}
+                    </div>
+                </div>
+            </div>
+        <div>
+    </main>
+{% endblock %}

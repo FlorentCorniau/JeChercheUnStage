@@ -1,0 +1,65 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Liste des offres de stage {% endblock %}
+
+{% block body %}
+    <main>
+        <div class="container mt-5">
+            <div class="container mt-5">
+                <div class="row">
+                    <div class="col-md-12 bg-body-tertiary border p-4 rounded">
+                        <h2 class="text-center text-muted fw-bold">Liste des offres de stage</h2>
+                        {% if region is defined %}
+                        <h3 class="text-center text-decoration-underline">Région {{ region }}</h3>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="bg-body-tertiary border mt-5 p-5 row d-flex align-items-between justify-content-around rounded">
+
+                    {% if form is defined %}
+                        <div class="row d-flex justify-content-center">
+                            <div class="col-md-5 text-center" id="form-filter-offer">
+                                {{ form_start(form) }}
+                                {{ form_row(form.industries) }}
+                                {{ form_end(form) }}
+                                <button id="offer-reset-filter" class="btn btn-warning">Réinitialiser le filtre</button>
+                            </div>
+                        </div>
+                    {% endif %}
+
+                    {% if offers is empty %}
+                        <div class="alert alert-danger alert-dismissible fade show mt-3">
+                            Aucune offre n'est disponible dans votre région ou dans le secteur d'activité selectionné.
+                        </div>
+                    {% endif %}
+
+                    <div id="filter-offer-no-results">
+                        {#  #}
+                    </div>
+
+                    <div id="filter-offers-fetch" class="row row-cols-md-3">
+                        {% for offer in offers %}
+                            <div class="col-md-4 mt-4 mb-4">
+                                <div class="card">
+                                    <div class="row p-3">
+                                        <div class="d-flex justify-content-center mb-4">
+                                            <img src={{ asset('images/logo-company.jpeg') }} class="img-fluid rounded-circle p-1" style="width: 100px; height: 100px; object-fit: cover;" alt="icone d'entreprise">
+                                        </div>
+                                        <div class="text-start" style="height: 15vh;">
+                                            <h5 class="mb-3 text-muted fw-semibold">{{ offer.title }}</h5>
+                                            <p>{{ offer.description|u.truncate (50 , '...') }}</p>
+                                        </div>
+                                        <div class="d-flex justify-content-end">
+                                            <a class="btn btn-outline-secondary bi bi-eye btn-sm" href="{{ path('app_front_offer_show', {id: offer.id} )}}" role="button"> Détails</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock %}

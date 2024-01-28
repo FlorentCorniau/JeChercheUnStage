@@ -1,0 +1,76 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Mes offres publiées {% endblock %}
+
+{% block body %}
+
+<main>
+    <div class="container mt-5">
+        <div class="container mt-5">
+
+        {% include "fragments/_flash_message.html.twig" %}
+        
+            <div class="row">
+                <div class="col-md-12 bg-body-tertiary border p-4 rounded">
+                    <h2 class=" text-muted fw-bold text-center p-2 ">Mes offres publiées</h2>
+                </div>
+            </div>
+
+            <div class="bg-body-tertiary border mt-5 p-2 row d-flex align-items-between justify-content-around rounded">       
+
+                {# If the company hasn't offer published, display card to create an offer  #}
+                {% if app.user.offers is empty %}
+                    <div class="col-md-4 mt-4 mb-4 text-center">
+                        <div class="card ">
+                            <div class="row p-3 ">
+                                <div class="col-md-12 ">
+                                    <div class="col-md-12 ">
+                                        <img src={{ asset('images/logo-company.jpeg') }} class="img-fluid  rounded-circle " style="width: 100px; height: 100px; object-fit: cover;" alt="icone d'entreprise">
+                                    </div>
+                                    <h5 class="fw-semibold mt-2">Aucune offre postée.</h5>
+                                    <a href="{{ path('app_front_offer_create') }}" class="btn btn-outline-secondary mt-2" 
+                                        role="button">Créer une offre
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                {% endif %}
+
+                {# List of offers for the logged-in user#}
+                {% for offer in app.user.offers %} 
+                    <div class="col-md-4 mt-4 mb-4 col-sm-10">
+                        <div class="card">
+                            <div class="row p-3">
+                                <div class="d-flex justify-content-center mb-4p-1">
+                                    <img src={{ asset('images/logo-company.jpeg') }} class="img-fluid rounded-circle" style="width: 100px; height: 100px; object-fit: cover;" alt="icone d'entreprise">
+                                </div>
+                                <div class="text-start" style="height: 19vh;">
+                                    <h5 class="fw-semibold mt-4"> {{ offer.title }} </h5>
+                                    <p> {{ offer.description|u.truncate (100 , '...') }} </p>
+                                </div>
+
+                                <div class="mb-2 d-flex flex-row justify-content-around ">
+
+                                    <div class="d-flex justify-content-end">
+                                        <a class="btn btn-outline-secondary bi bi-eye btn-sm" href="{{ path('app_front_offer_update', {id: offer.id}) }}" role="button"> Modifier </a>
+                                    </div>                                                                           
+                                    
+                                    <button type="button" class="btn btn-sm btn-danger bi bi-trash dropdown-toggle "
+                                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Supprimer
+                                    </button>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item" href="{{ path('app_front_offer_delete', {id: offer.id}) }}">Oui, je supprime l'offre</a>
+                                        <a class="dropdown-item" href="#" data-toggle="dropdown">Annuler</a>
+                                    </div>
+                                </div>   
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+
+            </div>
+
+        </div>
+    </div>
+</main>
+{% endblock %}

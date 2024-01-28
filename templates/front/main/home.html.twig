@@ -1,0 +1,102 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Trouver un stage n’est plus une corvée{% endblock %}
+
+{% block body %}
+<main>
+    <div class="container mt-5">
+
+        <div class="container mt-5">
+            
+            {% include "fragments/_flash_message.html.twig" %}
+
+            <div class="row">
+                <div class="col-md-12 bg-body-tertiary border p-4 rounded">
+                    <h2 class="mb-3 text-muted fw-semibold text-center">C'est quoi JeChercheUnStage ?</h2>
+
+                    <div class="text-center">
+                        <img class="mb-2"src={{ asset('assets/images/logo.png') }} alt="Le logo de JeChercheUnStage" height="115">
+                    </div>
+
+                    <p class="pt-3">Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression. Le Lorem Ipsum est le faux texte standard de l'imprimerie depuis les années 1500, quand un imprimeur anonyme assembla ensemble des morceaux de texte pour réaliser un livre spécimen de polices de texte. Il n'a pas fait que survivre cinq siècles, mais s'est aussi adapté à la bureautique informatique, sans que son contenu n'en soit modifié. Il a été popularisé dans les années 1960 grâce à la vente de feuilles Letraset contenant des passages du Lorem Ipsum, et, plus récemment, par son inclusion dans des applications de mise en page de texte, comme Aldus PageMaker.</p>
+
+                    <p>Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression. Le Lorem Ipsum est le faux texte standard de l'imprimerie depuis les années 1500, quand un imprimeur anonyme assembla ensemble des morceaux de texte pour réaliser un livre spécimen de polices de texte. Il n'a pas fait que survivre cinq siècles, mais s'est aussi adapté à la bureautique informatique, sans que son contenu n'en soit modifié. Il a été popularisé dans les années 1960 grâce à la vente de feuilles Letraset contenant des passages du Lorem Ipsum, et, plus récemment, par son inclusion dans des applications de mise en page de texte, comme Aldus PageMaker.</p>
+
+                    <p>Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression. Le Lorem Ipsum est le faux texte standard de l'imprimerie depuis les années 1500, quand un imprimeur anonyme assembla ensemble des morceaux de texte pour réaliser un livre spécimen de polices de texte. Il n'a pas fait que survivre cinq siècles, mais s'est aussi adapté à la bureautique informatique, sans que son contenu n'en soit modifié. Il a été popularisé dans les années 1960 grâce à la vente de feuilles Letraset contenant des passages du Lorem Ipsum, et, plus récemment, par son inclusion dans des applications de mise en page de texte, comme Aldus PageMaker.</p>
+
+                    {% if not is_granted("ROLE_USER") %}
+                    <div class="d-flex justify-content-center mt-3">
+                        <a class="btn btn-warning" href={{ path('app_front_registration_company') }} role="button">Je suis une entreprise <i class="bi bi-arrow-right-circle"></i></a>
+                    </div>
+
+                    <div class="d-flex justify-content-center mt-3">
+                        <a class="btn btn-dark" href={{ path('app_front_registration_intern') }} role="button">Je suis un stagiaire en recherche <i class="bi bi-arrow-right-circle"></i></a>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="row mt-5 bg-body-tertiary border rounded"> 
+                <div class="col-xl-6 p-4 rounded">
+                    {% include "fragments/_map.html.twig" %}
+                </div>
+                        
+                <div class="col-xl-6 d-flex justify-content-around flex-column bg-body-tertiary rounded ">
+                    <div class="bg-white p-4 text-center rounded-4" >
+                        <h4 class="mb-3 text-muted fw-semibold">Nos entreprises partenaire</h4>
+                        <div class="row d-flex align-items-between pb-2">
+                            {# On check si randomCompany est défini, si oui on boucle dessus, on récupère le getName() pour l'afficher dans la Card #}
+                            {% if randomCompany is defined %}
+                                {% for random in randomCompany %}
+                                    {% include "fragments/_company_partner.html.twig" with {name: random.getName, id: random.getId} %}
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <div class="col-md-12 p-4 bg-white mt-3 rounded-4">
+                        <h4 class="text-center text-muted fw-semibold mb-3">Nos conseils</h4>
+                        <p>
+                            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Tenetur iusto, consequatur eos amet non soluta error maiores ipsam neque iste obcaecati nisi dolor blanditii. Eveniet vero iure laborum! Aliquam possimus molestiae facere recusandae accusantium alias ratione ea quisquam quos in.
+                        </p>
+                    </div>
+                    
+                </div>
+
+                
+            </div>
+
+        </div>
+
+        <div class="container mt-5">
+            <div class="row d-flex justify-content-between rounded">
+
+                <div class="col-md-6 bg-body-tertiary border p-4 rounded">
+                    <h4 class="text-muted fw-semibold mb-3">Témoignages</h4>
+                    <div class="row text-center">
+                        {% include "fragments/_testimonial.html.twig" with {fullname: "Maxime LE GENTIL", work: "Product Owner", image: "https://cdn-icons-png.flaticon.com/512/3135/3135715.png"} %}
+                        {% include "fragments/_testimonial.html.twig" with {fullname: "Florent CORNIAU", work: "Scrum Master", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTe9o2NUBrI7ff_PsDlWstLadQfeYYJ1b7mjficwwNhjJ3NFxeptkGS7CgIhAOeqV_VcBQ&usqp=CAU"} %}
+                        {% include "fragments/_testimonial.html.twig" with {fullname: "Chokri KRAIEM", work: "Développeur Web", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzby4Ms99HWEmibsus7vDOaXGpC6hrfN3NS76SzB_FQ4WuytfKqtvkfsEVpyqbdiOKlmA&usqp=CAU"} %}
+                    </div>
+                </div>
+
+                <div class="col-md-6 bg-body-tertiary border p-4 rounded">
+            
+                    <h4 class="text-muted fw-semibold mb-3">Statistiques</h4>
+                    
+                    <p>
+                        Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression. Le Lorem Ipsum est le faux texte standard de l'imprimerie depuis les années 1500
+                    </p>
+                    
+                    <canvas id="statistiques"></canvas>
+                    
+                    <div class="text-center pt-3">
+                        <button id="actualizeStatsJob" class="btn btn-outline-secondary">Actualiser les statistiques</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}

@@ -1,0 +1,85 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Détails d'une entreprise {% endblock %}
+
+{% block body %}
+
+    <main class="container mt-5">
+        <div class="container mt-5">
+
+            {% include "fragments/_flash_message.html.twig" %}
+
+            <div class="row justify-content-between">
+
+                <div class="col-md-12 bg-body-tertiary border p-3 text-center rounded">
+                    <img src={{ asset('images/logo-company.jpeg') }} class="img-fluid rounded-circle" style="width: 100px; height: 100px; object-fit: cover;" alt="icone d'entreprise"><img src="">
+                    <h1 class="mb-3 mt-4 text-center text-muted fw-semibold"> {{ company.name }} </h1>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row justify-content-between">
+                <div class="col-md-5 mt-5 d-flex justify-content-around flex-column bg-body-tertiary border p-3 rounded">
+                    <h3 class="mb-3 text-center text-muted fw-semibold"> Vos informations </h3>
+
+                    <div class="row d-flex align-items-between pb-2">   
+                        <div>
+                            <h5 class=" p-2"><b> Nom de votre société :</b></h5>
+                            <p class="p-2">{{ company.name }}</p>                                    
+                        </div>
+
+                        <div>
+                            <h5 class="border-top p-2"><b>Région :</b></h5>
+                            <p class="p-2">{{ company.region }}</p>
+                        </div>
+
+                            <div>
+                            <h5 class="border-top p-2"><b>Email :</b></h5>
+                            <p class="p-2">{{ company.email }}</p>
+                        </div>  
+
+                        <div> 
+                            <h5 class="border-top p-2"><b>Numéro de Siret :</b></h5>
+                            <p class="p-2">{{ company.siretNumber }}</p>
+                        </div>
+
+                        <div>
+                            <h5 class="border-top p-2"><b>Secteur d'activité :</b></h5>
+                            {% if company.industries is not empty %}  
+                                    {% for industry in industry %}
+                                        <p class="p-2">{{ industry.name }}</p>
+                                    {% endfor %}
+                            {% else %}
+                                <p class="p-2">Aucun secteur d'activité renseigné.</p>
+                            {% endif %}
+                        </div>
+
+                        <div>
+                            <h5 class="border-top p-2"><b>Linkedin :</b></h5>
+                            {% if company.linkedin is not empty %}
+                                <a class="p-2" href={{ company.linkedin }}>Profil LinkedIn</a>
+                            {% else %}
+                                <p class="p-2">Aucun lien LinkedIn renseigné.</p>
+                            {% endif %}
+                        </div>
+
+                    </div>               
+
+                </div>
+
+                <div class="col-md-5 mt-5 d-flex align-items-start flex-column bg-body-tertiary border rounded">
+                    <div class="row">
+                        <div class=" p-3 rounded" >
+                            <h3 class="mb-3 text-center text-muted fw-semibold" class="border-top p-2"> Description de l'entreprise </h3>
+                            <div class="row d-flex align-items-between pb-2 ">
+                                <p>{{ company.description|nl2br|raw}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div> 
+            </div>
+
+        </div>
+    </main>
+{% endblock %}

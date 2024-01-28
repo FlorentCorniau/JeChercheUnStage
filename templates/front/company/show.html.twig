@@ -1,0 +1,84 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Mon Compte Entreprise {% endblock %}
+
+{% block body %}
+    <main>
+        <div class="container mt-5 ">
+
+            {% include "fragments/_flash_message.html.twig" %}
+            
+            <div>
+                <div class="col-md-12 bg-body-tertiary border p-3 text-center rounded">
+                    <div class="d-flex justify-content-center mb-4" >
+                        <img src={{ asset('images/logo-company.jpeg') }} class="img-fluid rounded-circle" style="width: 100px; height: 100px; object-fit: cover;" alt="icône d'entreprise">
+                    </div>    
+                    <h1 class="mb-4 text-center text-muted fw-semibold"> {{ app.user.name }} </h1>
+                    <a href="{{ path('app_front_company_update') }}" class="btn btn-warning bi bi-pencil btn-sm " role="button"> Modifier </a>
+                </div>
+            </div>
+
+            <div class="container mt-5">
+        
+                <div class="row justify-content-between">
+                    <div class="col-md-6 d-flex justify-content-start flex-column bg-body-tertiary border p-3 rounded">
+                        <h3 class="text-center text-muted fw-semibold"> Vos informations </h3>
+
+                        <div class = "row d-flex align-items-between pb-2">
+                            <div>
+                                <h5 class="p-2"><b>Nom de votre société :</b></h5>
+                                <p class="ms-2">{{ app.user.name }}</p>                                    
+                            </div>
+
+                            <div>
+                                <h5 class="border-top p-2"><b>Région :</b></h5>
+                                <p class="ms-2">{{ app.user.region }}</p>
+                            </div>
+
+                                <div>
+                                <h5 class="border-top p-2"><b>Email :</b></h5>
+                                <p class="ms-2">{{ app.user.email }}</p>
+                            </div>  
+
+                            <div> 
+                                <h5 class="border-top p-2"><b>Numéro de Siret :</b></h5>
+                                <p class="ms-2">{{ app.user.siretNumber }}</p>
+                            </div>
+
+                            <div class="ms-2">
+                                <h5 class="border-top p-2"><b>Secteur d'activité :</b></h5>
+                                {% if app.user.industries is defined and app.user.industries is not empty %} 
+                                    {% for industry in app.user.industries %}
+                                        <p class="ms-2">{{ industry }}</p>
+                                    {% endfor %}
+                                {% else %}
+                                    <p class="p-2">Aucun secteur d'activité renseigné.</p>
+                                {% endif %} 
+                            </div>
+
+                            <div>
+                                <h5 class="border-top p-2"><b>Linkedin :</b></h5>
+                                {% if app.user.linkedin is not empty %}
+                                    <a class="ms-2" href={{ app.user.linkedin }}>Profil LinkedIn</a>
+                                {% else %}
+                                    <p class="ms-2">Aucun lien LinkedIn renseigné.</p>
+                                {% endif %}
+                            </div>
+                        </div>    
+                    </div>
+
+                    <div class="col-md-5 d-flex align-items-start flex-column  bg-body-tertiary border rounded">
+                        <div class="row  ">
+                            <div class="p-3 rounded" >
+                                <h3 class="mb-3 text-center text-muted fw-semibold"> Description de l'entreprise </h3>
+                                <div class="row d-flex align-items-between pb-2 ">
+                                    <p class="text-start overflow-auto" style="height: 100vh;"> {{ app.user.description|nl2br|raw}} </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock %}

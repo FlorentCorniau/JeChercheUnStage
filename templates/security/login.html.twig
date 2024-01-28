@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Connexion {% endblock %}
+
+{% block body %}
+    <main>
+        <div class="container mt-5 bg-body-tertiary p-5 rounded">
+            <form  method="post" action="{{path('app_security_login')}}">
+                {% if error %}
+                    <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                {% endif %}
+
+                {% if app.user %}
+                    <div class="mb-3 text-center">
+                        <p class="text-muted">Vous êtes déjà connecté avec l'email : <em class="fw-bold">"{{ app.user.userIdentifier }}"<em></p>
+                        <div class="text-center">
+                            <button class="btn btn-danger mt-2 mb-4" type="submit">
+                                <a class ="text-reset text-decoration-none" href="{{ path('app_security_logout') }}">Se déconnecter</a>
+                            </button>
+                        </div>
+                    </div>
+                {% endif %}
+
+
+                <h1 class="mb-3 font-weight-normal text-center text-muted fw-semibold">Connexion</h1>
+
+                <label for="inputEmail">Adresse e-mail</label>
+                <input type="email" value="{{ last_username }}" name="_username" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
+
+                <label class="pt-3" for="inputPassword">Mot de passe</label>
+                <input type="password" name="_password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                <input type="hidden" name="_target_path" value="{{ path('app_front_main_home')}}">
+
+                <div class="text-center">
+                    <button class="btn btn-dark mt-3 mt-4" type="submit"> Se connecter </button>
+                </div>
+            </form>
+        </div>
+    </main>
+{% endblock %}

@@ -1,0 +1,38 @@
+/* Carte de France */
+.land
+{
+    fill: #7FCAFC;
+    fill-opacity: 1;
+    stroke:white;
+    stroke-opacity: 1;
+    stroke-width:0.5;
+}
+.map__image {
+    width: 100%;
+}
+.map__image path:hover {
+    cursor: pointer;
+    fill: #ceb0b0;
+}
+body {
+    background-color: rgba(0, 0, 0, 0.171);
+    font-family:"Inter",sans-serif
+}
+
+.card:hover {
+    box-shadow: 0 15px 10px -10px rgba(31, 31, 31, 0.5);
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+span.stars-registration {
+    color: #DC3545;
+}
+
+canvas#sky {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1; /* Assurez-vous que le canvas est en arrière-plan */
+}
+

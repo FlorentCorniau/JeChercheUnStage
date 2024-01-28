@@ -1,0 +1,67 @@
+{% extends 'base.html.twig' %}
+{% form_theme form 'bootstrap_5_layout.html.twig' %}
+
+{% block title %} Mettre à jour mon compte {% endblock %}
+
+{% block body %}
+<main>
+    <div class="container mt-5 ">
+        <div class="container mt-5 ">
+            <div class="row justify-content-between">
+                <div class="col-md-12 bg-body-tertiary border p-3 text-center rounded">
+                    <div class="d-flex justify-content-center mb-4">
+                        
+                        {% if intern.pictureName is defined and intern.pictureName is not empty %}
+                            <img src={{ asset('images/stagiaires/' ~ intern.pictureName) }} class="img-fluid rounded-circle" style="width: 100px; height: 100px; object-fit: cover;" alt="Une photo de profile d'un stagiaire">
+                        {% else %} 
+                                <img src={{ asset ('images/stagiaires/logo-stagiaire.png')}} class="img-fluid rounded-circle" style="width: 100px; height: 100px; object-fit: cover;" alt="Image par défaut"  >   
+                        {% endif %}     
+                        
+                        </div>
+                            <h1 class="mb-4 text-center text-muted fw-semibold">
+                                {{ intern.firstname}} {{ intern.lastname }}</h1> 
+                            <button type="button" class="btn btn-sm btn-danger bi bi-trash dropdown-toggle"
+                                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Supprimer
+                            </button>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="{{ path('app_front_intern_delete') }}">Oui, je supprime mon compte</a>
+                                <a class="dropdown-item" href="#" data-toggle="dropdown">Annuler</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+        </div>
+    </div>
+    
+    <div class="container mt-5">
+        <div class="container mt-5">
+            <div class="row justify-content-between">
+
+                <div class="col-md-5 bg-body-tertiary border p-4 rounded">
+                    <h3 class="mb-3 text-muted fw-semibold text-center"> Vos informations </h3>
+                    <p class="mb-3 text-danger"><i>* Champs obligatoires </i></p>
+
+                    {{ form_start(form , {'attr': {'novalidate': 'novalidate'}})  }}
+
+                    {{ form_widget(form) }}
+
+                    {{ form_end(form) }}
+                    
+                </div>
+
+                <div class="col-md-5 bg-body-tertiary border p-4 rounded">
+                    <div class="row justify-content-between">
+                        <div class="rounded" >
+                            <h3 class="mb-3 text-muted fw-semibold text-center" > Description Stagiaire </h3>
+                            <div class="row d-flex align-items-between pb-2 ">
+                                <p class="overflow-auto" style="height:150vh;">{{ intern.description }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}

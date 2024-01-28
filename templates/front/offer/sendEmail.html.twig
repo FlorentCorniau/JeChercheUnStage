@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="fr">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>JeChercheUnStage</title>
+	</head>
+	<body
+		bgcolor="#D3D3D3" style="margin-top:20px; margin-bottom:20px">
+		<table border="0" align="center" cellspacing="0" cellpadding="0" bgcolor="#F8F9FA" style="padding: 35px;">
+			<tr>
+				<td>
+					<table border="0" cellspacing="0" cellpadding="0" style="text-align: center; color:#0f3462; font-family: sans-serif;">
+						<tr>
+							<td>
+								<h2 style="text-align:center; margin: 0px; padding-bottom: 25px; margin-top: 25px;">
+									<span style="color:lightcoral">JeChercheUnStage</span>
+								</h2>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<img src="{{ email.image('@images/logo.png') }}" height="100px" style="display:block; margin:auto;padding-bottom: 25px; ">
+							</td>
+						</tr>
+						<tr>
+							<td style="text-align: left;">
+								<p style=" margin: 0px 32px;padding-bottom: 25px;line-height: 2; font-size: 15px;">
+                   					{{ emailContain|nl2br|raw}}
+								</p>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table>
+	</body>
+</html>

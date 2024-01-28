@@ -1,0 +1,16 @@
+<!-- Card Homepage -->
+<div class="col-md-4 mt-4 mb-4">
+    <div class="card">
+        <div class="row p-3">
+            <div class="d-flex justify-content-center mb-4 border-dark  p-1" >
+                <img src={{ asset('images/logo-company.jpeg') }} class="img-fluid  rounded-circle" style="width: 100px; height: 100px; object-fit: cover;" alt="icone d'entreprise">
+            </div>
+            <div class="col text-start" style="height: 8vh;">
+                <h5 class="mb-3 text-center text-muted fw-semibold"> {{ name }} </h5>
+            </div>
+            <div class="d-flex justify-content-end p-3">
+                    <a class="btn btn-outline-secondary bi bi-eye btn-sm" href="{{ path('app_front_company_showCompany' , {id: id}) }}" role="button"> Voir l'entreprise</a>
+            </div>
+        </div>
+    </div>
+</div>

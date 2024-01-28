@@ -1,0 +1,88 @@
+{% extends 'base.html.twig' %}
+{% block title %} Détail de l'offre "{{ offer.title }}" {% endblock %}
+{% block body %}
+<main>
+    <div class="container mt-5">
+
+        {% include "fragments/_flash_message.html.twig" %}
+
+        <!-- Div en haut qui prend toute la largeur -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class=" bg-white border p-3 mt-5 text-center rounded">
+                    <img src={{ asset('images/offre.stage.jpeg') }} class="img-fluid   p-1  " style="width: 100px; height:100px; object-fit: cover;" alt="icone d'entreprise"><img src="">
+                    <h1 class="text-center fw-bold text-muted fw-semibold mb-3">{{ offer.title }}</h1>
+                    <p class=" bi bi-calendar-date-fill text-center fw-bold text-muted fw-semibold" > Publiée le : {{ offer.createdAt|date("d/m/Y")}}</p>
+                </div>
+            </div>
+        </div>
+        <!-- Div en bas avec trois colonnes -->
+        <div class="row mt-3">
+            <!-- Grande div en haut qui prend toute la largeur -->
+            <div class="col-md-12">
+                <div class="bg-white border p-5 mt-5 rounded p-4">
+
+                    <h3 class="text-start fw-bold text-muted fw-semibold mb-4">Les missions attendues</h3>
+                        <div class="overflow-auto" style="height:30vh;">
+                            <p class="border-top p-2">{{ offer.description}}</p>
+                        </div>
+
+                </div>
+            </div>
+            <!-- Deux petites div égales en bas -->
+            <div class="col-md-6">
+                <div class="bg-white border p-3 mt-5 rounded justify-content-between" style="height: 35vh;">
+                
+                    <h3 class="pb-2 fw-bold text-muted fw-semibold text-center">Quelques images de l'entreprise</h3>
+                    
+                    <div class="d-flex justify-content-between">
+                        <div class="col card shadow-sm p-1 mt-2 mb-2">
+                            <img src="https://www.francebureau.com/media/cache/produit/pradella/b/u/bureau_open_space_pradella_02_1450x935.webp" alt="open space" style="height: 100%;">
+                        </div>
+                        {# on picture #}
+                        <div class="col card shadow-sm p-1 mt-2 mb-2">
+                            <img src="https://culture-rh.com/wp-content/uploads/2023/10/img-entreprise-dialogue-social-parle-quoi.jpg" alt=" dialogue social" style="height: 100%;" >
+                        </div>
+                        {# on picture #}
+                        <div class="col card shadow-sm p-1 mt-2 mb-2">
+                            <img src="https://www.maxpiccinini.com/wp-content/uploads/reunion-equipe-1030x687.jpg" alt="reunion d'équipe " style="height: 100%;" >
+                        </div>
+                    </div>
+                    {% if offer.company.linkedin is not empty %}
+                        <div class="text-center mt-2">
+                            <a class="p-2 " href={{ offer.company.linkedin }} ><i class="bi bi-linkedin "> LinkedIn </i></a>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="bg-white border p-3 mt-5 rounded align-content-center" style="height: 35vh;">
+                
+                    <h3 class="pb-2 fw-bold text-muted fw-semibold text-center"> Candidater </h3>
+                    
+                    <div class="p-2">
+                        <div class="d-flex flex-column flex-wrap list-unstyled justify-content-center ">
+                            <p class="btn btn-sm btn-outline-secondary mx-1 mb-2">
+                                <b>Entreprise :</b> {{ offer.company.name }}
+                            </p>
+                            <p class="btn btn-sm btn-outline-secondary mx-1 mb-2">
+                                <b>Région :</b> {{ offer.region }}
+                            </p>
+                            <p class="btn btn-sm btn-outline-secondary mx-1 mb-2">
+                                <b>Durée du stage : </b> {{ offer.duration }} jours 
+                            </p>
+                            {# if user is intern => display the button to apply at this offer #}
+                            {% if is_granted("ROLE_INTERN") %}
+                                <div class="d-flex justify-content-center mt-2">
+                                    <a class="btn btn-secondary bi bi-send btn-sm" href={{ path('app_front_offer_offerApply', {id: offer.id}) }} role="button"> Postuler</a>
+                                </div>
+                            {% endif %}
+                        </div> 
+                    </div>
+                        
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}

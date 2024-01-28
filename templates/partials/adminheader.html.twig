@@ -1,0 +1,85 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-body-tertiary">
+    <div class="container"> <!-- container-fluid pour mettre le menu sur toute la largeur -->
+        <a class="navbar-brand fw-bold" href={{ path('app_front_main_home') }}>
+            <img src={{ asset('assets/images/logo.png') }} alt="" height="70">
+        </a>
+        
+        <!-- Menu Burger Responsive -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mx-auto mb-2 mb-lg-0 d-flex justify-align-between">
+                <li class="nav-item">
+                    {% if app.request.attributes.get('_route') == "app_front_main_home" %}
+                        <a class="nav-link active fw-semibold text-decoration-underline" href={{ path('app_front_main_home') }}>Retour au Front Office</a>
+                    {% else %}
+                        <a class="nav-link" href={{ path('app_front_main_home') }}>Retour au Front Office</a>
+                    {% endif %}
+                </li>
+                
+                <li class="nav-item">
+                    {% if app.request.attributes.get('_route') == "app_back_dashboard_home" %}
+                        <a class="nav-link active fw-semibold text-decoration-underline" href={{ path('app_back_dashboard_home') }}>Back-office</a>
+                    {% else %}
+                        <a class="nav-link" href={{ path('app_back_dashboard_home') }}>Back-office</a>
+                    {% endif %}
+                </li>
+
+
+                <li class="nav-item">
+                    {% if app.request.attributes.get('_route') == "app_back_intern_list" %}
+                        <a class="nav-link active fw-semibold text-decoration-underline" href={{ path('app_back_intern_list') }}>Gestion des stagiaires</a>
+                    {% else %}
+                        <a class="nav-link" href={{ path('app_back_intern_list') }}>Gestion des stagiaires</a>
+                    {% endif %}
+                </li>
+
+
+                <li class="nav-item">
+                    {% if app.request.attributes.get('_route') == "app_back_company_list" %}
+                        <a class="nav-link active fw-semibold text-decoration-underline" href={{ path('app_back_company_list') }}>Gestion des entreprises</a>
+                    {% else %}
+                        <a class="nav-link" href={{ path('app_back_company_list') }}>Gestion des entreprises</a>
+                    {% endif %}
+                </li>
+
+
+                <li class="nav-item">
+                    {% if app.request.attributes.get('_route') == "app_back_offer_list" %}
+                        <a class="nav-link active fw-semibold text-decoration-underline" href={{ path('app_back_offer_list') }}>Gestion des offres</a>
+                    {% else %}
+                        <a class="nav-link" href={{ path('app_back_offer_list') }}>Gestion des offres</a>
+                    {% endif %}
+                </li>
+
+
+                <li class="nav-item">
+                    {% if app.request.attributes.get('_route') == "app_back_admin_list" %}
+                        <a class="nav-link active fw-semibold text-decoration-underline" href={{ path('app_back_admin_list') }}>Gestion des admins</a>
+                    {% else %}
+                        <a class="nav-link" href={{ path('app_back_admin_list') }}>Gestion des admins</a>
+                    {% endif %}
+                </li>
+            </ul>
+            
+            <ul class="navbar-nav">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+
+                    <!-- Image d'un User -->
+                    <i class="bi bi-person-check fs-1" style="color: #46bdb7;"></i> <!-- Utilisateur  connecté -->
+
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <li><a class="dropdown-item" href={{ path('app_security_logout') }}>Se déconnecter</a></li>
+                </ul>
+            </li>
+            </ul>
+
+        </div>
+
+        
+    </div>
+</nav>

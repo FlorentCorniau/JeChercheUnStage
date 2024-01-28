@@ -1,0 +1,69 @@
+{% extends 'back/base.html.twig' %}
+
+{% block title %} Liste des stagiaires  {% endblock %}
+
+{% block body %}
+
+<main>
+	<div class="container">
+
+		<div class="row">
+			<div class="col ">
+	
+				<h1 class="text-muted fw-bold mt-4 mb-4" > Liste des stagiaires </h1>
+
+				{% include "fragments/_flash_message.html.twig" %}
+
+				<div class="overflow-x-auto">
+					<table class="table table-hover">
+						<thead>
+							<tr>
+								<th scope="col">#</th>							
+								<th scope="col">Nom</th>
+								<th scope="col">Prénom</th>
+								<th scope="col">Région</th>
+								<th scope="col">Linkedin</th>
+								<th scope="col" class="text-center">Détails</th>
+								<th scope="col" class="text-center">Supprimer </th>
+
+							</tr>
+						</thead>
+
+						<tbody>
+							{% for intern in interns %}
+								<tr>
+									<th scope="row">{{intern.id}}</th>
+									<td scope="col">{{intern.firstname}}</td>
+									<td scope="col">{{intern.lastname}}</td>
+									<td scope="col">{{intern.region}}</td>
+									<td scope="col">{{intern.linkedin}}</td>
+									<td scope="col"class="text-center">									
+										<a href="{{ path('app_front_intern_showProfile' , {id:intern.id})}}" class="btn btn-sm btn-warning"><i class="bi bi-search"></i></a>
+									</td>
+									
+									<td scope="col"class="text-center">
+										
+										<button type="button" class="btn btn-sm btn-danger dropdown-toggle"
+												data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+											<i class="bi bi-trash" aria-hidden="true"></i>
+										</button>
+										<div class="dropdown-menu">
+											<a class="dropdown-item" href="{{ path('app_back_intern_delete', {id:intern.id})}}">Oui, je veux supprimer</a>
+											<a class="dropdown-item" href="#" data-toggle="dropdown">Annuler</a>
+										</div>
+									</td>									
+								</tr>
+							{% endfor %}
+						</tbody>
+
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</main>
+
+        </div>
+    </div>
+</main>
+{% endblock %}

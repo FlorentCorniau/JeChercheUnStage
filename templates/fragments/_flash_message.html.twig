@@ -1,0 +1,10 @@
+<div class="row">
+    {% for label, messages in app.flashes %}
+        {% for message in messages %}
+            <div class="alert alert-{{label}} alert-dismissible fade show mt-3" role="alert">
+                {{message|raw}} {# ? ici |raw permet d'échapper les balise <b> dans mon message dans le controller #}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        {% endfor %}
+    {% endfor %}
+</div>

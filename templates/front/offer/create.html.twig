@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Création d'une offre de stage{% endblock %}
+
+{% block body %}
+    <main>
+        <div class="container mt-5 ">
+            <div>
+                <div class="col-md-12 bg-body-tertiary border p-3 text-center rounded">
+                    <h2 class="text-muted fw-bold p-2"> Création d'une offre de stage </h2>
+                </div>
+            </div>
+        </div>
+        <div class="container mt-5">
+            <div class="row justify-content-between">
+                <div class="col-md-12 bg-body-tertiary border p-4 me-4 rounded">
+                    <p class="mb-4 text-danger"><i>* Champs obligatoires </i></p>
+
+                    {{ form_start(formCreateOffer, {'attr': {'novalidate': 'novalidate'}}) }}  
+
+                    {{ form_widget(formCreateOffer) }}
+
+                    {{ form_end(formCreateOffer) }}
+                    
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock %}

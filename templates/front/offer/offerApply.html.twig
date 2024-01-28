@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Postuler à l'offre "{{offer.title}}" {% endblock %}
+
+{% block body %}
+<main>
+    <div class="container mt-5">
+        <div class="col-md-12 bg-body-tertiary border p-4 rounded">
+            <h2 class="text-center text-muted fw-bold"> Postuler à l'offre : <i>"{{offer.title}}"</i></h2>
+        </div>
+        
+        <div class="col-md-12 bg-body-tertiary border p-4 text-center text-muted fw-bold rounded ">
+            <h4> Le CV de votre profil sera ajouté automatiquement en Pièce-Jointe de votre candidature </h4>
+        </div>
+
+        {% if resume is not empty %}
+            <div class="col-md-12 bg-body-tertiary border p-4 rounded">
+                <p class="mb-3 text-danger"><i>* Champs obligatoires </i></p>
+                {{ form_start(formApplyOffer, {'attr': {'novalidate': 'novalidate'}}) }}  
+                {{ form_widget(formApplyOffer) }}
+                {{ form_end(formApplyOffer) }}
+            </div>
+        {% else %}
+            <div class="col-md-12 bg-body-tertiary border p-4 rounded">
+                <div class="alert alert-danger alert-dismissible fade show mt-3 text-center" role="alert">
+                    Veuillez importer un CV afin de postuler à une offre
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                <div class="text-center">
+                    <a href={{ path('app_front_intern_update') }} 
+                        class="btn btn-secondary">
+                        Ajouter un CV à votre profil
+                    </a>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+</main>
+{% endblock %}

@@ -1,0 +1,99 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Profil stagiaire de {{ intern.firstname }} {{ intern.lastname }}{% endblock %}
+
+{% block body %}
+
+<main class="container mt-5">
+    <div class="container mt-5">
+        <div class="row justify-content-between mt-4">
+            <div class="col-md-12 bg-body-tertiary border p-3 text-center rounded">
+                <div class="d-flex justify-content-center mb-4">
+
+                    {% if intern.pictureName is defined and intern.pictureName is not empty %}
+                        <img src={{ asset('images/stagiaires/' ~ intern.pictureName) }} class="img-fluid rounded-circle " style="width: 100px; height: 100px; object-fit: cover;" alt="Une photo de profile d'un stagiaire">
+                    {% else %} 
+                        <img src={{ asset ('images/stagiaires/logo-stagiaire.png')}} class="img-fluid rounded-circle" style="width: 100px; height: 100px; object-fit: cover;" alt="Image par défaut"  >   
+                    {% endif %} 
+                    
+                </div>
+                <h1 class="mb-3 text-center text-muted fw-semibold">
+                    {{ intern.firstname }} {{ intern.lastname }}
+                </h1>
+            </div>
+        </div>
+    
+        <div class="row justify-content-between mt-4">
+
+            <div class="col-md-5 bg-body-tertiary border p-4 me-4 rounded">
+                <h3 class="mb-3 text-center text-muted fw-semibold"> Description </h3>
+                <p class="text-start">{{ intern.description|nl2br|raw }} </p>
+            </div>
+
+            <div class="col-md-5 d-flex justify-content-around flex-column bg-body-tertiary border rounded">
+                <div class="row">
+                    <div class=" p-3 rounded" >
+                        <h3 class="mb-3 text-center text-muted fw-semibold"> Informations complémentaires </h3>
+                        <div class="row d-flex align-items-between pb-2 ">
+
+                            <h5 class="border-top p-2"><b> Date de naissance :</b> </h5>
+                            {% if intern.birthdate is defined and intern.birthdate is not empty %}
+                                <p>{{ intern.birthdate|date("d/m/Y")}}</p>
+                            {% else %}
+                                <p>Aucune date de naissance définie</p>    
+                            {% endif %}
+
+                            <h5 class="border-top p-2"> <b>Région : </b></h5>
+                            <p>{{ intern.region}} </p>
+
+                            <h5 class="border-top p-2"> <b> Secteurs d'activités :</b> </h5>
+                            {% if industries is defined and industries is not empty %}
+                                {% for industry in industries %}
+                                    <p>{{ industry }}</p>
+                                {% endfor %} 
+                            {% else %}
+                                <p>Aucun secteur d'activité renseigné.</p>
+                            {% endif %} 
+
+                            <h5 class="border-top p-2"> <b>Date d’inscription au site : </b> </h5>
+
+                            <p>{{ intern.createdAt|date("d/m/Y")}}</p>
+
+                            {% if is_granted("ROLE_COMPANY") %}
+                                <div class=" d-flex justify-content-center">
+                                    <a href="mailto:{{app.user.email}}"  class="btn btn-secondary bi bi-envelope-at-fill" role="button" > Contact</a>
+                                </div>
+                            {% endif %}  
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {# Div below : display buttons "LinkedIn" & "Télécharger CV" #}
+            {% if is_granted("ROLE_COMPANY") %}
+                <div class="col-md-12 bg-body-tertiary border p-4 text-center rounded mt-4">
+                    <div class=" d-flex justify-content-around  mt-1">
+
+                            {% if intern.linkedin is defined and intern.linkedin is not empty %}
+                            <a href="{{  intern.linkedin  }}" class="btn btn-outline-info " target="_blank">
+                                <i class="bi bi-linkedin"> LinkedIn </i>
+                            </a>
+                            {% else %}
+                                <i class="bi bi-linkedin"> Aucun profil LinkedIn disponible</i>
+                            {% endif %}
+
+                            {% if intern.resumeName is defined and intern.resumeName is not empty %}
+                            <a href="{{ asset('cv/stagiaires/' ~ intern.resumeName) }}" class="btn btn-outline-danger" target="_blank" download>
+                                <i class="bi bi-file-earmark-pdf"> Télécharger CV</i> 
+                            </a>
+                            {% else %}
+                                <i class="bi bi-file-earmark-pdf"> Aucun CV disponible </i> 
+                            {% endif %}  
+                            
+                    </div>
+                </div>
+            {% endif %} {# End below : display buttons "LinkedIn" & "Télécharger CV"  #}
+        </div>
+    </div>{# Fin div Container #}
+</main>      
+{% endblock %}

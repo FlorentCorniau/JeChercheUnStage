@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+{% form_theme registrationForm 'bootstrap_5_layout.html.twig' %}
+
+{% block title %}Inscription en tant qu'entreprise{% endblock %}
+
+{% block body %}
+    <main>
+        <div class="container mt-5">
+            <div class="container bg-body-tertiary p-5 mt-5 rounded">
+
+                <h1 class="text-center text-muted fw-semibold mb-4">Inscription Entreprise</h1>
+                <p class="mb-4 text-danger"><i>* Champs obligatoires </i></p>
+
+                {% if errorSiret is defined %}
+                    <div class="alert alert-danger" role="alert">
+                        {{ errorSiret }}
+                    </div>
+                {% endif %}
+
+                {{ form_errors(registrationForm) }}
+
+                {{ form_start(registrationForm) }}
+                    {{ form_row(registrationForm.email) }}
+                    {{ form_row(registrationForm.plainPassword) }}
+                <!--<button type="submit" class="btn">Register</button>-->
+                {{ form_end(registrationForm) }}
+            </div>    
+        </div>
+    </main>
+{% endblock %}

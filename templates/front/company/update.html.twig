@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+{% form_theme form 'bootstrap_5_layout.html.twig' %}
+
+{% block title %} Mise à jour de mon profil {% endblock %}
+
+{% block body %}
+    <main>
+        <div class="container mt-5 ">
+            <div class="container mt-5 ">
+                <div class="row justify-content-between">
+                    <div class="col-md-12 bg-body-tertiary border p-3 text-center rounded">
+                        <div class="d-flex justify-content-center mb-4" >
+                            <img src={{ asset('images/logo-company.jpeg') }} class="img-fluid rounded-circle" style="width: 100px; height: 100px; object-fit: cover;" alt="icône d'entreprise">
+                        </div> 
+                        <h1 class="mb-3 text-center text-muted fw-semibold"> {{ app.user.name }} </h1>
+                        <button type="button" class="btn btn-sm btn-danger bi bi-trash dropdown-toggle"
+                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Supprimer
+                        </button>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="{{ path('app_front_company_delete') }}">Oui, je supprime mon compte</a>
+                            <a class="dropdown-item" href="#" data-toggle="dropdown">Annuler</a>
+                        </div>
+                    </div>   
+                </div>
+            </div>
+
+            <div class="container mt-5">
+                <div class="row justify-content-between">
+
+                    <div class="col-md-5 justify-content-center bg-body-tertiary border p-4 me-4 rounded">
+                        <h3 class="mb-3 text-muted fw-semibold"> Vos informations </h3>                            
+                        <p class="mb-3 text-danger"><i>* Champs obligatoires </i></p>
+
+                        {{ form_start(form , {'attr': {'novalidate': 'novalidate'}})  }}
+
+                        {{ form_widget(form) }}
+
+                        {{ form_end(form) }}
+
+                    </div>
+
+                    <div class="col-md-5 d-flex align-items-start flex-column bg-body-tertiary border rounded mt-3">
+                        <div class="row justify-content-between">
+                            <div class=" p-3 rounded" >
+                                <h3 class="mb-3 text-center text-muted fw-semibold"> Description de l'entreprise </h3>
+                                <div class="row d-flex align-items-between pb-2 ">
+                                    <p class="overflow-auto" style="height:130vh;">{{ app.user.description }}</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock %}

@@ -1,0 +1,60 @@
+{% extends 'back/base.html.twig' %}
+
+{% block title %} Liste des entreprises {% endblock %}
+
+{% block body %}
+
+<main>
+	<div class="container">
+		<div class="row ">
+			<div class="col">
+	
+				<h1 class="text-muted fw-bold mt-4 mb-4" > Liste des entreprises </h1>
+				{% include "fragments/_flash_message.html.twig" %}
+				
+				<div class="overflow-x-auto">
+					<table class="table table-hover">
+						<thead>
+							<tr>
+								<th scope="col">#</th>							
+								<th scope="col">Nom</th>
+								<th scope="col">Numéro de Siret</th>
+								<th scope="col">Région</th>
+								<th scope="col">Linkedin</th>
+								<th scope="col" class="text-center">Détails</th>
+								<th scope="col" class="text-center">Supprimer </th>
+							</tr>
+						</thead>
+
+						<tbody>
+							{% for company in companies %}
+								<tr>
+									<th scope="row">{{company.id}}</th>
+									<td scope="col">{{company.name}}</td>
+									<td scope="col">{{company.siretNumber}}</td>
+									<td scope="col">{{company.region}}</td>
+									<td scope="col">{{company.linkedin}}</td>
+									<td scope="col" class="text-center">									
+										<a href="{{ path('app_front_company_showCompany' , {id:company.id})}}" class="btn btn-sm btn-warning"><i class="bi bi-search"></i></a>
+									</td>
+									<td scope="col" class="text-center">
+										<button type="button" class="btn btn-sm btn-danger dropdown-toggle"
+											data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+											<i class="bi bi-trash" aria-hidden="true"></i>
+										</button>
+										
+										<div class="dropdown-menu">
+										<a class="dropdown-item" href="{{ path('app_back_company_delete', {id:company.id})}}">Oui, je veux supprimer</a>
+											<a class="dropdown-item" href="#" data-toggle="dropdown">Annuler</a>
+										</div>
+									</td>									
+								</tr>
+							{% endfor %}
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</main>
+{% endblock %}

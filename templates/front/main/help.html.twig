@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Aide / FAQ {% endblock %}
+
+{% block body %}
+<main>
+    <div class="container mt-5">
+        <!--1er container -->
+        <div class="container border bg-body-tertiary p-4 border rounded">
+            <h2 class="text-center text-muted fw-semibold">FAQ</h2>
+        </div>
+        <!-- 2eme container -->
+        <div class="container border bg-body-tertiary p-5 border mt-4 rounded">
+            <h2 class="text-center text-muted fw-semibold pt-2 pb-4 fs-3">Questions fréquentes</h2>
+            <div class="ps-5 pe-5">
+                {% include "fragments/_help.html.twig" %}
+            </div>
+            <h3 class="text-center pt-5 fs-5">Votre question n'est pas présente ?</h3>
+        </div>
+    </div>
+</main>
+{% endblock %}

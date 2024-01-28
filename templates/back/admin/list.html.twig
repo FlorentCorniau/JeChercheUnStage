@@ -1,0 +1,69 @@
+{% extends 'back/base.html.twig' %}
+
+{% block title %} Liste des administrateurs {% endblock %}
+
+{% block body %}
+	<main>
+		<div class="container mt-5">
+
+			<div class="container mt-5">
+
+				<h1 class="text-muted fw-bold mt-4 mb-4 text-center">Gestion des Administrateurs</h1>
+
+				<dd class="border-bottom text-center">
+					<a class="btn btn-warning btn-sm mb-4" href="{{ path('app_back_admin_create')}}" role="button">
+						<b>Ajouter un administrateur</b>
+					</a>
+				</dd>
+
+				<div class="col-md-12">
+		
+					<h2 class="text-muted fw-bold mt-4 mb-4 text-center"> Liste des Administrateurs </h2>
+					{% include "fragments/_flash_message.html.twig" %}
+					<div class="overflow-x-auto">
+						<table class="table table-hover">
+							<thead>
+								<tr>
+									<th scope="col">#</th>							
+									<th scope="col">Prémon</th>
+									<th scope="col">Nom</th>
+									<th scope="col">Créé</th>
+									<th scope="col">Modifié le</th>
+									<th scope="col" class="text-center">Modifier</th>
+									<th scope="col" class="text-center">Supprimer</th>
+								</tr>
+							</thead>
+
+							<tbody>
+								{% for admin in admins %}
+									<tr>
+										<th scope="row">{{ admin.id }}</th>
+										<td scope="col">{{ admin.firstname }}</td>
+										<td scope="col">{{ admin.lastname }}</td>
+										<td scope="col">{{ admin.createdAt|date('d/m/Y') }}</td>
+										<td scope="col">{{ admin.updatedAt|date('d/m/Y') }}</td>
+										<td scope="col" class="text-center">									
+											<a href={{ path('app_back_admin_update', {id: admin.id}) }} class="btn btn-sm btn-warning"><i class="bi bi-pencil"></i></a>
+										</td>
+										<td scope="col" class="text-center">
+											<button type="button" class="btn btn-sm btn-danger dropdown-toggle"
+												data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+												<i class="bi bi-trash" aria-hidden="true"></i>
+											</button>
+											
+											<div class="dropdown-menu">
+												<a class="dropdown-item" href="{{ path('app_back_admin_delete', {id:admin.id})}}">Oui, je veux supprimer</a>
+												<a class="dropdown-item" href="#" data-toggle="dropdown">Annuler</a>
+											</div>
+										</td>									
+									</tr>
+								{% endfor %}
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</main>
+
+{% endblock %}
